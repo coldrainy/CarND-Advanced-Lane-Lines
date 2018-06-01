@@ -68,14 +68,14 @@ points_dist = np.float32([[850,0],[850,720],[350,720],[350,0]])
 
 I verified that my perspective transform was working as expected by drawing the `points_src` and `points_dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
 
-![perspective][/output_images/perspective.png)]
+![perspective](/output_images/perspective.png)
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
 Then I implement the sliding window method to find the lane-line pixels and fit my lane lines with a 2nd order polynomial(at the line 199 throuth 258 in the findLane.py file) kinda like this:
 
-![lane_line_pixels][/output_images/lane_line_pixel.png)]
-![polynomial][/output_images/polynomial.png)]
+![lane_line_pixels](/output_images/lane_line_pixel.png)
+![polynomial](/output_images/polynomial.png)
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
@@ -85,7 +85,7 @@ I calculated the radius in lines 274 through 280 in my code in `fineLane.py` and
 
 I plotted the result back down onto the road in lines 259 through 273 in my code in `fineLane.py` in the function `draw_lane(binary_warped,left_fit,right_fit)`.  Here is an example of my result on a test image:
 
-![lane][/output_images/lane.png)]
+![lane](/output_images/lane.png)
 
 ---
 
