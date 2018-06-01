@@ -74,7 +74,7 @@ I verified that my perspective transform was working as expected by drawing the 
 
 Then I implement the sliding window method to find the lane-line pixels and fit my lane lines with a 2nd order polynomial(at the line 199 throuth 258 in the findLane.py file) kinda like this:
 
-![lane_line_pixels][/output_images/lane_line_pixels.png)]
+![lane_line_pixels][/output_images/lane_line_pixel.png)]
 ![polynomial][/output_images/polynomial.png)]
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
