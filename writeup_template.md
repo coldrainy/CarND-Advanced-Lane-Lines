@@ -41,20 +41,20 @@ I start by preparing "object points", which will be the (x, y, z) coordinates of
 
 I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function.  I applied this distortion correction to the test image using the `cv2.undistort()` function and obtained this result: 
 
-![calibration](/output_images/undistort_output.png)
+![calibration](/output__image/undistort_output.png)
 
 ### Pipeline (single images)
 
 #### 1. Provide an example of a distortion-corrected image.
 
 To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
-![calibration](/output_images/1.png)
+![calibration](/output__image/1.png)
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
 I used a combination of color and gradient thresholds to generate a binary image.I defined the threshold function at lines 69 through 147 in findLane.py.And use them to get warped binary image in the function get_warped_binary at line 171 through 183. Here's an example of my output for this step.
 
-![threshold_binary](/output_images/threshold_binary.png)
+![threshold_binary](/output__image/threshold_binary.png)
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
@@ -68,14 +68,14 @@ points_dist = np.float32([[850,0],[850,720],[350,720],[350,0]])
 
 I verified that my perspective transform was working as expected by drawing the `points_src` and `points_dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
 
-![perspective](/output_images/perspective.png)
+![perspective][/output__image/perspective.png)]
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
 Then I implement the sliding window method to find the lane-line pixels and fit my lane lines with a 2nd order polynomial(at the line 199 throuth 258 in the findLane.py file) kinda like this:
 
-![lane_line_pixels](/output_images/lane_line_pixel.png)
-![polynomial](/output_images/polynomial.png)
+![lane_line_pixels][/output__image/lane_line_pixels.png)]
+![polynomial][/output__image/polynomial.png)]
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
@@ -85,7 +85,7 @@ I calculated the radius in lines 274 through 280 in my code in `fineLane.py` and
 
 I plotted the result back down onto the road in lines 259 through 273 in my code in `fineLane.py` in the function `draw_lane(binary_warped,left_fit,right_fit)`.  Here is an example of my result on a test image:
 
-![lane](/output_images/lane.png)
+![lane][/output__image/lane.png)]
 
 ---
 

@@ -274,9 +274,8 @@ def draw_lane(binary_warped,left_fit,right_fit):
 def calculate_param(left_fit,right_fit,y_eval):
     # Define conversions in x and y from pixels space to meters
 
-    ym_per_pix = 50/360 # meters per pixel in y dimension
-    left_curverad = ((1 + (2*left_fit[0]*y_eval*ym_per_pix + left_fit[1])**2)**1.5) / np.absolute(2*left_fit[0])
-    right_curverad = ((1 + (2*right_fit[0]*y_eval*ym_per_pix + right_fit[1])**2)**1.5) / np.absolute(2*right_fit[0])
+    left_curverad = (((1 + (2*left_fit[0]*y_eval + left_fit[1])**2)**1.5) / np.absolute(2*left_fit[0]))*ym_per_pix
+    right_curverad = (((1 + (2*right_fit[0]*y_eval + right_fit[1])**2)**1.5) / np.absolute(2*right_fit[0]))*ym_per_pix
     return left_curverad,right_curverad
 def process_image(img):
 
@@ -289,10 +288,12 @@ def process_image(img):
     left_fit,right_fit = fit_laneline(binary_warped,leftx_current,rightx_current)
     lane_img = draw_lane(binary_warped,left_fit,right_fit)
     result = cv2.addWeighted(img, 1, lane_img, 0.2, 0)
-    xm_per_pix = 10/1280 # meters per pixel in x dimension
     left_curverad,right_curverad = calculate_param(left_fit,right_fit,img.shape[1])
-    offset = ((rightx_current - leftx_current)-img.shape[1]//2)*xm_per_pix
-    cv2.putText(result, 'Radius of Curvature = ' +  str(left_curverad) + 'm', (300, 45) ,cv2.FONT_HERSHEY_SIMPLEX,0.9,(255, 255, 255),2,cv2.LINE_AA)
+    offset = ((rightx_current + leftx_current)//2-img.shape[1]//2)*xm_per_pix
+    if left_curverad>1000:
+        cv2.putText(result, 'Radius of Curvature is straight' , (300, 45) ,cv2.FONT_HERSHEY_SIMPLEX,0.9,(255, 255, 255),2,cv2.LINE_AA)
+    else:
+        cv2.putText(result, 'Radius of Curvature is ' +  str(left_curverad) + 'm', (300, 45) ,cv2.FONT_HERSHEY_SIMPLEX,0.9,(255, 255, 255),2,cv2.LINE_AA)
     cv2.putText(result, 'Vehicel is ' + str(offset) + 'm' + ' of center.',(300, 95) ,cv2.FONT_HERSHEY_SIMPLEX,0.9,(255, 255, 255),2,cv2.LINE_AA)
     return result
 
@@ -305,6 +306,9 @@ from IPython.display import HTML
 #clip3 = VideoFileClip('test_videos/challenge.mp4').subclip(0,5)
 l_line = Line()
 r_line = Line()
+
+xm_per_pix = 3.7/500 # meters per pixel in x dimension
+ym_per_pix = 80/720
 
 video_output1 = 'project_video_output.mp4'
 clip3 = VideoFileClip('project_video.mp4')
